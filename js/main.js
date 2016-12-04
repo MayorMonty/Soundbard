@@ -1,3 +1,7 @@
+/**
+  * main.js - Outlines all the UI interactions in this very simple app, in an event based format
+  */
+
 /** Settings Pane **/
 // UI Changes
 Event.listen("button.settings", function() {
@@ -16,3 +20,16 @@ Event.listen("button.settings", function() {
 Event.listen("button.settingsPane", function() {
   document.querySelector("input[type=file]").click();
 })
+
+
+/** Handle File Uploads - i.e. when the user clicks "upload" or similar on the file selector dialog **/
+Event.listen("action.handleFile", function(files) {
+  let reader;
+  for (var i = 0; i < files.length; i++) {
+    Event.trigger("action.saveFile", files[i])
+  }
+});
+
+Event.listen("action.saveFile", function() {
+
+});
