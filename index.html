@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!-- I'm not declaring the manifest file until I write the Service Worker -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Soundbard | Quick and Easy Sound Board</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+  <script type="application/javascript" src="js/event.js"></script>
+  <script type="application/javascript" src="js/main.js"></script>
+</head>
+<body>
+  <nav>
+    <a href="#" onclick="Event.trigger('button.settings', this)">
+      <i class="fa fa-plus"></i>
+    </a>
+  </nav>
+  <section class="settings state-hidden" onclick="Event.trigger('button.settingsPane', this)">
+    <h1>Click to add audio files</h1>
+    <input type="file" id="upload" multiple onchange="Event.trigger('action.handleFile', this.files)" accept="audio/*">
+  </section>
+  <main>
+
+  </main>
+  <footer>
+
+  </footer>
+
+</body>
+</html>
