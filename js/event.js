@@ -8,12 +8,16 @@ const Event = (function() {
   // Stores all instances of events and their callbacks in an {"event": [callback, callback, ...]} style
   let events = {};
   let debug = false;
+  function updateDebug(value) {
+    if (typeof value !== "boolean") throw new TyperError("Debug must be a boolean");
+    return debug = value;
+  }
 
   function trigger(name, data) {
 
     if  (!events.hasOwnProperty(name)) throw new ReferenceError("Unknown event `"+name+"` (in event.trigger)")
 
-    console.log("[Event] Trigger " + name);
+    if (debug) console.log("[Event] Trigger " + name);
 
     for (var i = 0; i < events[name].length; i++) {
       // .call(<this>, param1, param2, ...) - I'm using .call instead of () in order to set the <this> of the function
@@ -27,7 +31,7 @@ const Event = (function() {
     // Create the event if it does not exist
     if (!events.hasOwnProperty(name)) events[name] = [];
 
-    if (debug) console.log("[Event] Added listener to `"+name+"`: " + callback)
+    if (debug) console.log("[Event] Added listener to `"+name+"`: " + callback);
 
     return events[name].push(callback);
 
@@ -36,6 +40,5 @@ const Event = (function() {
   return {
     "trigger": trigger,
     "listen": listen,
-    "debug": debug
-  };
+    "debug": updateDebug
 })();
