@@ -23,13 +23,49 @@ Event.listen("button.settingsPane", function() {
 
 
 /** Handle File Uploads - i.e. when the user clicks "upload" or similar on the file selector dialog **/
+
+// Parse through each, file and only save the audio ones
 Event.listen("action.handleFile", function(files) {
-  let reader;
+  let file;
   for (var i = 0; i < files.length; i++) {
-    Event.trigger("action.saveFile", files[i])
+    file = files[i]
+    // Make sure we only have audio files (that we could assume this agent could use; maybe I'll change this filter later to drop files for which the agent cannot play, but later)
+    if (/\.(wav|mp3|oga|webm)$/i.test(file.name)) {
+      Event.trigger("action.saveFile", file);
+    } else {
+      console.log("Dropped " + file.name + " because it has an invalid extension");
+    }
   }
 });
 
-Event.listen("action.saveFile", function() {
+// Save the file to the "disk"
+Event.listen("action.saveFile", function(file) {
+  // Get the list from localStorage or instaniate if it does not exist
+  let list = JSON.parse(localStorage["list"] || "[]")
+  let reader = new FileReader();
+
+
+  reader.addEventListener("load", function() {
+
+    // Save the DataURL in a localStorage as the file name, and add it to the list
+    localStorage[file.name] = reader.result;
+    list.push(file.name);
+
+    console.log("Saved " + file.name);
+    // Indicate to the UI an update in the List of songs (and save list in localStorage);
+    Event.trigger("action.updateList", list);
+  });
+
+  reader.readAsDataURL(file);
+
+});
+
+/** Update the List of Sounds on the Board **/
+// Update the localStorage
+Event.listen("action.updateList", function(list) {
+  localStorage["list"] = JSON.stringify(list);
+})
+// Update the UI
+Event.listen("action.updateList", function(list) {
 
 });
