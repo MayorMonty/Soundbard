@@ -37,6 +37,7 @@ section.settings {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 section.settings.state-hidden {
