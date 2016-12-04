@@ -1,0 +1,51 @@
+body, html {
+  margin: 0;
+  height: 100%;
+  font-family: "Roboto"
+}
+
+
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 80px;
+  width: 100vw;
+  background: #446CB3;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  z-index: 1;
+}
+
+nav a {
+  color: #FFFFFF;
+  margin-right: 64px;
+  font-size: 200%;
+}
+
+
+
+section.settings {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  background: #446CB3;
+  top: 0;
+  transition: 0.2s top;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+section.settings.state-hidden {
+  top: -100vh;
+}
+
+section.settings input[type=file]#upload {
+  display: none;
+}
+section.settings h1 {
+  color: white;
+}
