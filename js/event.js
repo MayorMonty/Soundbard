@@ -41,4 +41,5 @@ const Event = (function() {
     "trigger": trigger,
     "listen": listen,
     "debug": updateDebug
+  }
 })();

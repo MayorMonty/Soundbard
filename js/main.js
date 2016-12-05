@@ -2,6 +2,15 @@
   * main.js - Outlines all the UI interactions in this very simple app, in an event based format
   */
 
+
+// "redraw" (i.e. draw) the sound cards upon page load
+document.addEventListener("load", function() {
+  console.log("Document Loaded")
+  Event.trigger("action.redrawSounds", JSON.parse(localStorage["list"]));
+});
+
+
+
 /** Settings Pane **/
 // UI Changes
 Event.listen("button.settings", function() {
@@ -64,8 +73,23 @@ Event.listen("action.saveFile", function(file) {
 // Update the localStorage
 Event.listen("action.updateList", function(list) {
   localStorage["list"] = JSON.stringify(list);
-})
-// Update the UI
-Event.listen("action.updateList", function(list) {
+  Event.trigger("action.redrawSounds", list);
+});
+
+// Stores all of the Audio Objects for playing
+var AudioObjects = {};
+
+/** Draw the Sound Cards **/
+Event.listen("action.redrawSounds", function(list) {
+  let main = document.getElementsByTagName("main")[0];
+
+  // Clear the existing Cards
+  main.innerHTML = "";
+
+  for (var i = 0; i < list.length; i++) {
+    let soundcard = new SoundCard(list[i], localStorage[list[i]]);
+
+    main.appendChild(soundcard);
+  }
 
 });

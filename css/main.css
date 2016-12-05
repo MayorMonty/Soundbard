@@ -1,7 +1,9 @@
 body, html {
   margin: 0;
   height: 100%;
-  font-family: "Roboto"
+  font-family: "Roboto";
+  background: #eeeeee;
+  overflow-x: hidden;
 }
 
 
@@ -16,7 +18,7 @@ nav {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  z-index: 1;
+  z-index: 2;
 }
 
 nav a {
@@ -38,6 +40,7 @@ section.settings {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  z-index: 1;
 }
 
 section.settings.state-hidden {
@@ -49,4 +52,31 @@ section.settings input[type=file]#upload {
 }
 section.settings h1 {
   color: white;
+}
+
+
+main {
+  margin: 0 auto;
+  max-width: 960px;
+  width: 100%;
+  min-height: 100vh;
+  background: #eeeeee;
+  position: relative;
+  top: 80px;
+  padding-top: 12px;
+
+
+}
+
+
+.soundcard {
+  background: #446CB3;
+  color: #FFFFFF;
+  text-align: center;
+  display: inline-block;
+  height: 60px;
+  min-width: 112px;
+  width: 100%;
+  cursor: pointer;
+  margin-bottom: 12px
 }
