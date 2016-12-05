@@ -4,7 +4,7 @@
 
 
 // "redraw" (i.e. draw) the sound cards upon page load
-document.addEventListener("load", function() {
+window.addEventListener("load", function() {
   console.log("Document Loaded")
   Event.trigger("action.redrawSounds", JSON.parse(localStorage["list"]));
 });
